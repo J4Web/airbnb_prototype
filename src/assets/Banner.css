@@ -30,3 +30,16 @@
     border:none;
 
 }
+.banner__searchButton{
+    background-color:#fff !important;
+    font-weight:900  !important;
+    text-transform: inherit !important;
+    color: #ff7779 !important;
+    /* outline:none; */
+    border:none!important;
+}
+.banner__search{
+    display:flex;
+    flex-direction: column;
+   
+}
