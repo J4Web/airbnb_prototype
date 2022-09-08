@@ -1,10 +1,36 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 import './SearchPage.css';
 import { Button } from "@material-ui/core";
 import SearchResult from "./SearchResult";
 import SortIcon from '@mui/icons-material/Sort';
 import axios from 'axios';
+import useSWR from 'swr'
 function SearchPage() {
+const axiosInstance = axios.create({
+    baseURL: 'https://airbnb19.p.rapidapi.com/api/v1',
+  headers: {
+    'X-RapidAPI-Key': '1f0e2a247cmsh8df10ab00fe6a28p16be71jsnef3bfadb6457',
+    'X-RapidAPI-Host': 'airbnb19.p.rapidapi.com',
+  },
+});
+// console.log(axiosInstance.baseURL)
+async function fetcher(url) {
+  const res = await axiosInstance.get(url);
+  return res.data.data;
+}
+
+
+  
+  async function fetcher(url) {
+    const res = await axiosInstance.get(url);
+    return res.data;
+  }
+  
+
+const { data, error} = useSWR('/getCategory', fetcher);
+// console.log(data)
+
     return (
         <div className='searchPage'>
             <div className='searchPage__info'>
@@ -17,13 +43,25 @@ function SearchPage() {
                 <Button variant="outlined">More filters</Button>
                 <SortIcon className="search__filter"/>
             </div>
-            <SearchResult
-                img="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ_wbPYTxQPMcBh7SPzLFActXnP3uhifeVT_g&usqp=CAU"
+           {/* { data?.map(item=>{
+                  return <SearchResult
+                img={item}
                 location="Private room in center of London"
                 title="Stay at this spacious Edwardian House"
                 description="1 guest · 1 bedroom · 1 bed · 1.5 shared bthrooms · Wifi · Kitchen · Free parking · Washing Machine"
                 star={4.73}
                 price="£30 / night"
+                total="£117 total"
+            />
+            })}  */}
+
+             <SearchResult
+                img="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ_wbPYTxQPMcBh7SPzLFActXnP3uhifeVT_g&usqp=CAU"
+                location="Private room in center of London"
+                title="Stay at this spacious Edwardian House"
+                description="1 guest · 1 bedroom · 1 bed · 1.5 shared bthrooms · Wifi · Kitchen · Free parking · Washing Machine"
+                star={4.73}
+               
                 total="£117 total"
             />
 
@@ -33,7 +71,7 @@ function SearchPage() {
                 title="Independant luxury studio apartment"
                 description="2 guest · 3 bedroom · 1 bed · 1.5 shared bthrooms · Wifi · Kitchen"
                 star={4.3}
-                price="£40 / night"
+                
                 total="£157 total"
             />
 
@@ -43,7 +81,7 @@ function SearchPage() {
                 title="London Studio Apartments"
                 description="4 guest · 4 bedroom · 4 bed · 2 bathrooms · Free parking · Washing Machine"
                 star={3.8}
-                price="£35 / night"
+             
                 total="£207 total"
             />
             <SearchResult
@@ -52,7 +90,7 @@ function SearchPage() {
                 title="30 mins to Oxford Street, Excel London"
                 description="1 guest · 1 bedroom · 1 bed · 1.5 shared bthrooms · Wifi · Kitchen · Free parking · Washing Machine"
                 star={4.1}
-                price="£55 / night"
+           
                 total="£320 total"
             />
             <SearchResult
@@ -61,7 +99,7 @@ function SearchPage() {
                 title="Spacious Peaceful Modern Bedroom"
                 description="3 guest · 1 bedroom · 1 bed · 1.5 shared bthrooms · Wifi · Free parking · Dry Cleaning"
                 star={5.0}
-                price="£60 / night"
+           
                 total="£450 total"
             />
             <SearchResult
@@ -70,7 +108,7 @@ function SearchPage() {
                 title="The Blue Room In London"
                 description="2 guest · 1 bedroom · 1 bed · 1.5 shared bthrooms · Wifi · Washing Machine"
                 star={4.23}
-                price="£65 / night"
+             
                 total="£480 total"
             />
             <SearchResult
@@ -79,7 +117,7 @@ function SearchPage() {
                 title="5 Star Luxury Apartment"
                 description="3 guest · 1 bedroom · 1 bed · 1.5 shared bthrooms · Wifi · Kitchen · Free parking · Washing Machine"
                 star={3.85}
-                price="£90 / night"
+        
                 total="£650 total"
             />
         </div>

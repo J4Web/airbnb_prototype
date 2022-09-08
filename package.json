@@ -14,12 +14,14 @@
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.27.2",
     "date-fns": "^2.15.0",
+    "node-fetch": "^3.2.10",
     "react": "^18.2.0",
     "react-date-range": "^1.0.3",
     "react-dom": "^18.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^5.0.1",
-    "styled-components": "^5.3.5"
+    "styled-components": "^5.3.5",
+    "swr": "^1.3.0"
   },
   "scripts": {
     "start": "react-scripts start",
